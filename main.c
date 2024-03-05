@@ -96,9 +96,8 @@ int main(int argc, char** argv) {
         printf("received %s\n", request);
         fflush(stdout);
 
-        char reply[] = "Hello from my web server in C";
-        //TODO: This isn't working
-        send(cfd, reply, sizeof(reply), MSG_DONTROUTE);
+        char* reply = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
+        send(cfd, reply, strlen(reply), 0);
     }
 
     if(close(socket_file_descriptor) == -1) {
