@@ -83,8 +83,22 @@ int main(int argc, char** argv) {
             fflush(stdout);
             return -1;
         }
-
         printf("got connection %d\n", cfd);
+        fflush(stdout);
+
+        char request[255];
+        int msg_len = recv(cfd, (void *)request, sizeof(request), MSG_WAITALL);
+        if(msg_len == -1) {
+            printf("Error receiving message from socket\n");
+            fflush(stdout);
+            return -1;
+        }
+        printf("received %s\n", request);
+        fflush(stdout);
+
+        char reply[] = "Hello from my web server in C";
+        //TODO: This isn't working
+        send(cfd, reply, sizeof(reply), MSG_DONTROUTE);
     }
 
     if(close(socket_file_descriptor) == -1) {
