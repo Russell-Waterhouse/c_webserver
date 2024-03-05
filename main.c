@@ -14,7 +14,6 @@ typedef struct Header {
     char* value;
 } Header;
 
-
 typedef struct Request {
     char* headers;
     char* numHeaders;
