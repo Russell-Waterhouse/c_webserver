@@ -4,9 +4,15 @@
 
 Using each of these technologies, I'm building a webserver with the following
 features:
-1. SQLite integration
-2. HTML Templates
-3. Concurrent request handling
+1. Routing
+2. Concurrent request handling
+3. Database integration
+4. HTML templating
+5. Session management
+6. Authentication
+7. Logging
+8. Tests
+9. Middleware support
 
 The only existing abstraction that I'll be using is websockets.
 Everything else will be built from scratch.
@@ -47,15 +53,16 @@ foundation of abstractions are built into the project.
 
 When I have the following built into one language's webserver, I'll open it up
 to contributions:
-- Basic routing
-- Basic concurrent request handling
-- Basic database integration
-- Basic HTML templating
-- Session management
-- Authentication
-- Logging
-- Tests
-- Middleware support
+
+1. Routing
+2. Concurrent request handling
+3. Database integration
+4. HTML templating
+5. Session management
+6. Authentication
+7. Logging
+8. Tests
+9. Middleware support
 
 # License
 This project is open-sourced under the MIT License. See the LICENSE
