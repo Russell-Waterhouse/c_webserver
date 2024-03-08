@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/_types/_socklen_t.h>
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -8,6 +9,8 @@
 #include <unistd.h>
 
 #define LISTEN_BACKLOG 50
+#define SUCCESS 1
+#define FAIL -1
 
 typedef struct Header {
     char* key;
@@ -35,6 +38,21 @@ typedef struct Response {
     int status;
     char* statusText;
 } Response;
+
+
+int socket_to_request(char* request_data, size_t request_data_len, Request* r);
+int socket_to_request(char* request_data, size_t request_data_len, Request* r) {
+    if (r == NULL || request_data == NULL) {
+        printf("Received NULL params");
+        return FAIL;
+    }
+
+    memset(r, 0, sizeof(Request));
+    r->method = "GET";
+
+    return SUCCESS;
+}
+
 
 int main(void);
 
@@ -96,6 +114,8 @@ int main(void) {
             return -1;
         }
         printf("received %s\n", request);
+        Request r;
+        r.
         fflush(stdout);
 
         char* reply = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
