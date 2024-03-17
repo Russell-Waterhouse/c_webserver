@@ -1,57 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <sys/_types/_socklen_t.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <string.h>
 #include <errno.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include "http.h"
 
 #define LISTEN_BACKLOG 50
-#define SUCCESS 1
-#define FAIL -1
-
-typedef struct Header {
-    char* key;
-    char* value;
-} Header;
-
-typedef struct Request {
-    char* headers;
-    char* numHeaders;
-    char* url;
-    char* credentials;
-    char* destination;
-    char* integrity;
-    char* method;
-    char* mode;
-    char* body;
-} Request;
-
-typedef struct Response {
-    char* type;
-    char* url;
-    char* headers;
-    int numHeaders;
-    char* body;
-    int status;
-    char* statusText;
-} Response;
-
-
-int socket_to_request(char* request_data, size_t request_data_len, Request* r);
-int socket_to_request(char* request_data, size_t request_data_len, Request* r) {
-    if (r == NULL || request_data == NULL) {
-        printf("Received NULL params");
-        return FAIL;
-    }
-
-    memset(r, 0, sizeof(Request));
-    r->method = "GET";
-
-    return SUCCESS;
-}
 
 
 int main(void);
@@ -115,8 +71,10 @@ int main(void) {
         }
         printf("received %s\n", request);
         Request r;
-        r.
-        fflush(stdout);
+        r.body = NULL;
+        if (r.body == NULL) {
+            printf("body is null\n");
+        }
 
         char* reply = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
         send(cfd, reply, strlen(reply), 0);

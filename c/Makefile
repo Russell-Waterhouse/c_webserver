@@ -1,7 +1,14 @@
+result.o:
+	gcc result.h -c -Wextra -Wall -Werror -pedantic -pedantic-errors -o result.o
 
+fatchar.o: result.o
+	gcc fatchar.c -c -Wextra -Wall -Werror -pedantic -pedantic-errors -o fatchar.o
 
-webserver:
-	gcc main.c  -Wextra -Wall -Werror -pedantic -pedantic-errors -o webserver
+http.o: http.h
+	gcc http.c -c -Wextra -Wall -Werror -pedantic -pedantic-errors -o http.o
+
+webserver: main.c fatchar.o result.o http.o
+	gcc main.c -Wextra -Wall -Werror -pedantic -pedantic-errors -o webserver
 
 build: webserver
 	echo "Build Complete"
@@ -13,5 +20,5 @@ run: webserver
 	./webserver
 
 clean:
-	rm -f webserver
+	rm -f webserver fatchar.o result.o http.o
 

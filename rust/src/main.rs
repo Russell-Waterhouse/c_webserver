@@ -5,11 +5,12 @@ use std::io::{self, Write};
 use io::ErrorKind::InvalidData;
 use std::str::{self};
 
-mod http;
+pub mod http;
+pub mod http_integration_tests;
 
-use crate::http::http::{Request, Response};
+use crate::http::http::{Request, Response, Status};
 
-fn main() -> Result<(), std::io::Error> {
+pub fn main() -> Result<(), std::io::Error> {
     let result_or_error = TcpListener::bind("127.0.0.1:9999");
     if result_or_error.is_err() { eprintln!("Error: {}\n", result_or_error.as_ref().unwrap_err()); return Err(result_or_error.unwrap_err());
     }
@@ -36,7 +37,7 @@ fn main() -> Result<(), std::io::Error> {
 fn send_hello(stream: &mut TcpStream) -> io::Result<()> {
     let mut bufr: [u8; 1024] = [0; 1024];
     let response = Response{
-        status: 200,
+        status: Status::NotImplemented501,
         headers: Vec::new(),
         body: "".to_string(),
     };
