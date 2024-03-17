@@ -1,9 +1,9 @@
 #ifndef RESULT_H
 #define RESULT_H
 
-enum Result {
+typedef enum Result {
     SUCCESS,
     FAILURE,
-};
+} Result;
 
 #endif

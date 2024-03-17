@@ -1,24 +1,28 @@
+CFLAGS = -Wextra -Wall -Werror -pedantic -pedantic-errors
+CLIBFLAGS = -c $(CFLAGS)
+
 result.o:
-	gcc result.h -c -Wextra -Wall -Werror -pedantic -pedantic-errors -o result.o
+	gcc result.h $(CLIBFLAGS) -o result.o
 
 fatchar.o: result.o
-	gcc fatchar.c -c -Wextra -Wall -Werror -pedantic -pedantic-errors -o fatchar.o
+	gcc fatchar.c $(CLIBFLAGS) -o fatchar.o
 
 http.o: http.h
-	gcc http.c -c -Wextra -Wall -Werror -pedantic -pedantic-errors -o http.o
+	gcc http.c $(CLIBFLAGS) -o http.o
 
 webserver: main.c fatchar.o result.o http.o
-	gcc main.c -Wextra -Wall -Werror -pedantic -pedantic-errors -o webserver
+	gcc main.c $(CFLAGS) -o webserver
 
 build: webserver
 	echo "Build Complete"
 
 test: webserver
-	./webserver
+	gcc test_http.c $(CFLAGS) -o http_test
+	./http_test
 
 run: webserver
 	./webserver
 
 clean:
-	rm -f webserver fatchar.o result.o http.o
+	rm -f webserver http_test *.o
 

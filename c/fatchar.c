@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 #include "fatchar.h"
 #include "result.h"
 
@@ -39,3 +41,32 @@ fat_char_result char_at(fat_char* fc, int idx) {
     return fcr;
 }
 
+bool fat_chars_equal(fat_char* fc1, fat_char* fc2) {
+    if (fc1 == NULL || fc2 == NULL) {
+        return false;
+    }
+
+    if (fc1->len != fc2->len) {
+        return false;
+    }
+
+    for (int i = 0; i < fc1->len; i++) {
+        if (fc1->str[i] != fc2->str[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+Result delete_fat_char(fat_char* fc) {
+    if (fc == NULL) {
+        return FAILURE;
+    }
+
+    free(fc->str);
+    fc->str = NULL;
+    free(fc);
+    fc = NULL;
+    return SUCCESS;
+}
