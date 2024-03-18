@@ -6,7 +6,7 @@
 #include "result.h"
 
 
-fat_char* make_fat_char(fat_char* fc, int length, char* str) {
+fat_char* make_fat_char(fat_char* fc, unsigned int length, char* str) {
     if (fc == NULL) {
         printf("Received NULL fat_char\n");
         fflush(stdout);

@@ -2,23 +2,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// #include "fatchar.h"
 #include "http.h"
 #include "result.h"
 #include "fatchar.h"
 
 
-RequestResult* request_from_bytes(char* bytes, unsigned int bytes_len){
+RequestResult* request_from_bytes(char* bytes, size_t bytes_len){
     RequestResult* rr = calloc(1, sizeof(RequestResult));
     if (rr == NULL) {
-        printf("malloc failed in request_from_bytes\n");
+        printf("calloc failed in request_from_bytes\n");
         fflush(stdout);
         return NULL;
     }
 
-    Request* req = malloc(sizeof(Request));
+    Request* req = calloc(1, sizeof(Request));
     if (req == NULL) {
-        printf("malloc failed in request_from_bytes\n");
+        printf("calloc failed in request_from_bytes\n");
         fflush(stdout);
         rr->result = FAILURE;
         return rr;
@@ -26,18 +25,21 @@ RequestResult* request_from_bytes(char* bytes, unsigned int bytes_len){
     rr->request = req;
 
     if (bytes == NULL) {
+        printf("#request_from_bytes bytes is null\n");
+        fflush(stdout);
         rr->result = FAILURE;
         return rr;
     }
 
     if (bytes_len < 1) {
+        printf("#request_from_bytes bytes_len is less than 1\n");
         rr->result = FAILURE;
         return rr;
     }
 
 
-
-    return NULL;
+    rr->result = SUCCESS;
+    return rr;
 }
 
 enum Result deleteRequest(Request* request) {

@@ -63,7 +63,7 @@ int main(void) {
         fflush(stdout);
 
         char request[255];
-        int msg_len = recv(cfd, (void *)request, sizeof(request), MSG_WAITALL);
+        ssize_t msg_len = recv(cfd, (void *)request, sizeof(request), MSG_WAITALL);
         if(msg_len == -1) {
             printf("Error receiving message from socket\n");
             fflush(stdout);

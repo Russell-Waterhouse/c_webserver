@@ -30,7 +30,7 @@ enum Result test_request_from_bytes() {
         "Sec-Fetch-Site: none\r\n"
         "Sec-Fetch-User: ?1\r\n";
 
-    RequestResult* rr = request_from_bytes(request, strnlen(request, 0));
+    RequestResult* rr = request_from_bytes(request, strlen(request));
     if (
             assert(rr != NULL, "#test_request_from_bytes result not null") == FAILURE ||
             assert(rr->request != NULL, "#test_request_from_bytes result's request not null") == FAILURE ||

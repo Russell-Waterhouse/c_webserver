@@ -1,6 +1,7 @@
 #ifndef HTTP_H
 #define HTTP_H
 
+#include <stdlib.h>
 #include "fatchar.h"
 #include "result.h"
 
@@ -45,7 +46,7 @@ typedef struct request_result {
     Request* request;
 } RequestResult;
 
-RequestResult* request_from_bytes(char* bytes, unsigned int bytes_len);
+RequestResult* request_from_bytes(char* bytes, size_t bytes_len);
 
 Result deleteRequest(Request* request);
 Result delete_request_result(RequestResult* rr);
