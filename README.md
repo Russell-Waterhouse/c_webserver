@@ -1,8 +1,8 @@
-# Low Level Webservers
+# Web Servers From Scratch
 
 ## Simple web servers using no existing abstractions in C, C++, and Rust!
 
-Using each of these technologies, I'm building a webserver with the following
+Using each of these technologies, I'm building a web server with the following
 features:
 1. Routing
 2. Concurrent request handling
@@ -14,10 +14,10 @@ features:
 8. Tests
 9. Middleware support
 
-The only existing abstraction that I'll be using is websockets.
+The only existing abstraction that I'll be using is Berkley Sockets.
 Everything else will be built from scratch.
 
-I have a few reasons for doing this:
+## Motivation
 1. I want to explore more low-level technologies.
 2. I want to compare and contrast these low-level technologies.
 3. I want to understand EVERYTHING that web servers are doing.
@@ -51,7 +51,7 @@ installed before attempting to run the servers.
 Contributions are not being accepted at this time. They will be accepted when a
 foundation of abstractions are built into the project.
 
-When I have the following built into one language's webserver, I'll open it up
+When I have the following built into one language's web server, I'll open it up
 to contributions:
 
 1. Routing
