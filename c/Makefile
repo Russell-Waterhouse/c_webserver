@@ -1,4 +1,4 @@
-CFLAGS = -Wextra -Wall -Werror -pedantic -pedantic-errors -Wconversion -Wsign-conversion -Wshadow -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-but-set-variable -Wno-unused-value -Wno-unused-result -Wno-implicit-fallthrough -Wno-sign-compare -Wno-strict-aliasing -Wno-implicit-function-declaration -Wno-implicit-int -Wno-implicit -Wno-implicit-int
+CFLAGS = -std=c17 -Wextra -Wall -Werror -pedantic -pedantic-errors -Wconversion -Wsign-conversion -Wshadow -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-but-set-variable -Wno-unused-value -Wno-unused-result -Wno-implicit-fallthrough -Wno-sign-compare -Wno-strict-aliasing -Wno-implicit-function-declaration -Wno-implicit-int -Wno-implicit -Wno-implicit-int
 CLIBFLAGS = -c $(CFLAGS)
 
 result.o: result.h
