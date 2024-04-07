@@ -23,7 +23,7 @@ typedef struct Header {
 
 typedef struct Request {
     Header** headers;
-    int num_headers;
+    unsigned short int num_headers;
     fat_char* url;
     fat_char* destination;
     RequestMethod method;

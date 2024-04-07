@@ -5,17 +5,21 @@
 #include "http.h"
 #include "result.h"
 
+#define COLOR_RED "\033[31m"
+#define COLOR_GREEN "\033[32m"
+#define COLOR_RESET "\033[0m"
+
 enum Result assert(bool condition, char* test_name) {
     if (condition) {
-        printf("%s succeeded\n", test_name);
+        printf("%s %s succeeded %s\n", COLOR_GREEN, test_name, COLOR_RESET);
         return SUCCESS;
     } else {
-        printf("%s failed\n", test_name);
+        printf("%s %s failed %s\n", COLOR_RED, test_name, COLOR_RESET);
         return FAILURE;
     }
 }
 
-enum Result test_request_from_bytes() {
+enum Result test_request_from_bytes(void) {
     char* request =
         "GET / HTTP/1.1\r\n"
         "Host: localhost:9999\r\n"
@@ -35,8 +39,10 @@ enum Result test_request_from_bytes() {
             assert(rr != NULL, "#test_request_from_bytes result not null") == FAILURE ||
             assert(rr->request != NULL, "#test_request_from_bytes result's request not null") == FAILURE ||
             assert(rr->result == SUCCESS, "#test_request_from_bytes result's result is success") == FAILURE ||
-            assert(rr->request->method == GET, "#test_request_from_bytes result's method is GET") == FAILURE
+            assert(rr->request->method == GET, "#test_request_from_bytes result's method is GET") == FAILURE ||
+            assert(rr->request->num_headers == 11, "#test_num_headers is correct") == FAILURE
         ) {
+        printf("rr->request->num_headers is: %d\n", rr->request->num_headers);
         delete_request_result(rr);
         return FAILURE;
     }
@@ -44,12 +50,12 @@ enum Result test_request_from_bytes() {
 
 
     if (delete_request_result(rr) == FAILURE) {
-        printf("delete_request_result failed\n");
+        printf("%s delete_request_result failed %s\n", COLOR_RED, COLOR_RESET);
     }
     return SUCCESS;
 }
 
-int main() {
+int main(void) {
     enum Result result1 = test_request_from_bytes();
     if (result1 == FAILURE) {
         return -1;

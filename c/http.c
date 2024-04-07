@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,6 +7,8 @@
 #include "result.h"
 #include "fatchar.h"
 
+#define NULL_TERMINATOR '\0'
+#define SINGLE_SPACE ' '
 
 RequestResult* request_from_bytes(char* bytes, size_t bytes_len){
     RequestResult* rr = calloc(1, sizeof(RequestResult));
@@ -37,6 +40,36 @@ RequestResult* request_from_bytes(char* bytes, size_t bytes_len){
         return rr;
     }
 
+    unsigned int i = 0;
+    unsigned int buffer_len = 0;
+    unsigned short int num_headers = 0;
+
+    // parsing the request method
+    while(bytes[i] != SINGLE_SPACE && i < bytes_len) {
+
+        printf("request_method: %c\n", bytes[i]);
+        i++;
+    }
+    i++;
+
+    // parsing the rest of the first line (request PATH, HTTP version)
+    while(bytes[i] != '\n' && i > 0 && bytes[i-1] != '\r') {
+        i++;
+        printf("first line: %c\n", bytes[i]);
+    }
+    i++;
+
+    // parsing the request headers
+    while(bytes[i] != NULL_TERMINATOR && i < bytes_len) {
+        printf("headers: %c\n", bytes[i]);
+        if(bytes[i] == '\n' && i > 0 && bytes[i-1] == '\r') {
+            // reached the end of the line in the request
+            num_headers++;
+        }
+
+        i++;
+    }
+    req->num_headers = num_headers;
 
     rr->result = SUCCESS;
     return rr;
@@ -67,7 +100,7 @@ enum Result deleteRequest(Request* request) {
     return SUCCESS;
 }
 
-enum Result deleteHeaders(Request* request) {
+Result deleteHeaders(Request* request) {
     if (request == NULL) {
         printf("#deleteHeaders request is null\n");
         fflush(stdout);
