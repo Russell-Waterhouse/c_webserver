@@ -36,11 +36,12 @@ enum Result test_request_from_bytes(void) {
 
     RequestResult* rr = request_from_bytes(request, strlen(request));
     if (
-            assert(rr != NULL, "#test_request_from_bytes result not null") == FAILURE ||
-            assert(rr->request != NULL, "#test_request_from_bytes result's request not null") == FAILURE ||
-            assert(rr->result == SUCCESS, "#test_request_from_bytes result's result is success") == FAILURE ||
-            assert(rr->request->method == GET, "#test_request_from_bytes result's method is GET") == FAILURE ||
-            assert(rr->request->num_headers == 11, "#test_num_headers is correct") == FAILURE
+            assert(rr != NULL, "#request_from_bytes result not null") == FAILURE ||
+            assert(rr->request != NULL, "#request_from_bytes result's request not null") == FAILURE ||
+            assert(rr->result == SUCCESS, "#request_from_bytes result's result is success") == FAILURE ||
+            assert(rr->request->method == GET, "#request_from_bytes result's method is GET") == FAILURE ||
+            assert(rr->request->num_headers == 11, "#num_headers is correct") == FAILURE
+            // assert(rr->request->headers[0]->key->len == 5, "#first header key length is correct") == FAILURE
         ) {
         printf("rr->request->num_headers is: %d\n", rr->request->num_headers);
         delete_request_result(rr);
