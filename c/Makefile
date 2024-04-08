@@ -2,27 +2,27 @@ CFLAGS = -std=c17 -Wextra -Wall -Werror -pedantic -pedantic-errors -Wconversion 
 CLIBFLAGS = -c $(CFLAGS)
 
 result.o: result.h
-	gcc result.h $(CLIBFLAGS) -o result.o
+	gcc result.h $(CLIBFLAGS) -o target/result.o
 
 fatchar.o: result.o fatchar.c fatchar.h
-	gcc fatchar.c $(CLIBFLAGS) -o fatchar.o
+	gcc fatchar.c $(CLIBFLAGS) -o target/fatchar.o
 
 http.o: http.h http.h fatchar.o result.o
-	gcc http.c $(CLIBFLAGS) -o http.o
+	gcc http.c $(CLIBFLAGS) -o target/http.o
 
 webserver: main.c fatchar.o result.o http.o
-	gcc main.c $(CFLAGS) -o webserver
+	gcc main.c $(CFLAGS) -o target/webserver
 
 build: webserver
 	echo "Build Complete"
 
 test: webserver
-	gcc test_http.c http.o fatchar.o $(CFLAGS) -o http_test
-	./http_test
+	gcc target/test_http.c target/http.o target/fatchar.o $(CFLAGS) -o target/http_test
+	./target/http_test
 
 run: webserver
-	./webserver
+	./target/webserver
 
 clean:
-	rm -f webserver http_test *.o
+	rm -f target/*
 
