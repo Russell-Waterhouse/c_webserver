@@ -46,8 +46,6 @@ RequestResult* request_from_bytes(char* bytes, size_t bytes_len){
 
     // parsing the request method
     while(bytes[i] != SINGLE_SPACE && i < bytes_len) {
-
-        printf("request_method: %c\n", bytes[i]);
         i++;
     }
     i++;
@@ -55,13 +53,11 @@ RequestResult* request_from_bytes(char* bytes, size_t bytes_len){
     // parsing the rest of the first line (request PATH, HTTP version)
     while(bytes[i] != '\n' && i > 0 && bytes[i-1] != '\r') {
         i++;
-        printf("first line: %c\n", bytes[i]);
     }
     i++;
 
     // parsing the request headers
     while(bytes[i] != NULL_TERMINATOR && i < bytes_len) {
-        printf("headers: %c\n", bytes[i]);
         if(bytes[i] == '\n' && i > 0 && bytes[i-1] == '\r') {
             // reached the end of the line in the request
             num_headers++;
