@@ -16,7 +16,7 @@ Everything else will be built from scratch.
 ## Current Work State
 | Feature | C | C++ | Rust |
 | ------- | - | --- | ---- |
-| Routing | in progress | Not started | in progress |
+| Routing | in progress | in-progress | in progress |
 | Concurrent Request Handling | Not started | Not started | Not started |
 | Database Integration | Not started | Not started | Not started |
 | HTML Templating | Not started | Not started | Not started |
