@@ -17,7 +17,11 @@ build: webserver
 	echo "Build Complete"
 
 test: webserver
-	gcc target/test_http.c target/http.o target/fatchar.o $(CFLAGS) -o target/http_test
+	gcc test_http.c target/http.o target/fatchar.o $(CFLAGS) -o target/http_test
+	valgring --leak-check=yes ./target/http_test
+
+test_no_valgrind: webserver
+	gcc test_http.c target/http.o target/fatchar.o $(CFLAGS) -o target/http_test
 	./target/http_test
 
 run: webserver
