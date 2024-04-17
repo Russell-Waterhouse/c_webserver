@@ -8,14 +8,19 @@ features:
 2. Concurrent request handling
 3. Database integration
 4. HTML templating
-5. Session management
-6. Authentication
-7. Logging
-8. Tests
-9. Middleware support
+5. Tests
 
 The only existing abstraction that I'll be using is Berkley Sockets.
 Everything else will be built from scratch.
+
+## Current Work State
+| Feature | C | C++ | Rust |
+| ------- | - | --- | ---- |
+| Routing | in progress | Not started | in progress |
+| Concurrent Request Handling | Not started | Not started | Not started |
+| Database Integration | Not started | Not started | Not started |
+| HTML Templating | Not started | Not started | Not started |
+| Tests | :white_check_mark: | Not started | Not started |
 
 ## Motivation
 1. I want to explore more low-level technologies.
@@ -50,19 +55,6 @@ installed before attempting to run the servers.
 
 Contributions are not being accepted at this time. They will be accepted when a
 foundation of abstractions are built into the project.
-
-When I have the following built into one language's web server, I'll open it up
-to contributions:
-
-1. Routing
-2. Concurrent request handling
-3. Database integration
-4. HTML templating
-5. Session management
-6. Authentication
-7. Logging
-8. Tests
-9. Middleware support
 
 # License
 This project is open-sourced under the MIT License. See the LICENSE
