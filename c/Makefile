@@ -18,7 +18,7 @@ build: webserver
 
 test: webserver
 	gcc test_http.c target/http.o target/fatchar.o $(CFLAGS) -o target/http_test
-	valgring --leak-check=yes ./target/http_test
+	valgrind --leak-check=yes ./target/http_test
 
 test_no_valgrind: webserver
 	gcc test_http.c target/http.o target/fatchar.o $(CFLAGS) -o target/http_test
